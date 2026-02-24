@@ -15,37 +15,48 @@ const SignIn = () => {
     }
     let navigate=useNavigate();
     
-    let handleData=async()=>{
-        if(!userData.email||!userData.userName||!userData.password)
-        {
-            alert("Please enter all required fields.")
-            return
-        }
-        if(userData.password.length<8)
-        {
-          alert('Password should contain at least 8 characters');
-          return
-        }
-        try{
-          await addDoc(collection(db,'user'),{
-            email: userData.email,
-            userName: userData.userName,
-            password: userData.password
-          })
-        }
-        catch{e=>console.log(e);
-        }
-        let q=query(collection(db,'user'),where('email','==',userData.email));
-        let dataBasedata=await getDocs(q);
-        if(!dataBasedata.empty)
-        {
-          alert("An account with this email already exists. Please log in.")
-          return;
-        }
-        localStorage.setItem('user',JSON.stringify(userData))
-        alert("You have signed in successfully.")
-        navigate('/')
+    let handleData = async () => {
+
+  if (!userData.email || !userData.userName || !userData.password) {
+    alert("Please enter all required fields.");
+    return;
+  }
+
+  if (userData.password.length < 8) {
+    alert("Password should contain at least 8 characters.");
+    return;
+  }
+
+  try {
+
+    let q = query(
+      collection(db, "user"),
+      where("email", "==", userData.email)
+    );
+
+    let dataBasedata = await getDocs(q);
+
+    if (!dataBasedata.empty) {
+      alert("An account with this email already exists. Please log in.");
+      return;
     }
+    else{
+    await addDoc(collection(db, "user"), {
+      email: userData.email,
+      userName: userData.userName,
+      password: userData.password
+    });
+  }
+
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    alert("You have signed in successfully.");
+    navigate("/");
+
+  } catch (e) {
+    console.log(e);
+  }
+};
   return (
     <div id='signInContainer'>
       <div className="lightningWrapper" style={{ width: "100vw", height: "100vh", position: "relative" }}>
