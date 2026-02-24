@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import imagenotfound from "../src/assets/noimagefoundimage.png";
+import imagenotfound from "./assets/noimagefoundimage.png";
 import Title from "./Title";
 import LightPillar from "./LightPillar";
 import Skeleton from "react-loading-skeleton";
