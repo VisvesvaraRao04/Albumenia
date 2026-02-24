@@ -62,7 +62,7 @@ body::-webkit-scrollbar-thumb{
 /* Input Box */
 #input_box {
   padding: 1.5vh 2vw;
-  width: 60vw;
+  width: 50vw;
   max-width: 400px;
   border-radius: 1vh;
   border: none;
@@ -324,6 +324,12 @@ button:hover {
   .images {
   width: 90vw;
   }
+  #input_box {
+    width: 100%;
+  }
+  #searchbardiv {
+    width: 90vw !important;
+  }
   .font-semibold{
     font-size: 7vh;
   }
@@ -350,7 +356,7 @@ button:hover {
 
 #searchbardiv {
   display: flex;
-  width: 50vw;
+  width: 46vw;
   justify-content: center;
   align-items: center;
   position: relative;

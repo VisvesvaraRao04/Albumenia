@@ -66,7 +66,7 @@ const SignIn = () => {
         <input type="text" name="userName" id="usernameInput" placeholder='Enter your name' onChange={setdata}/>
         <input type="text" name="email" id="emailInput" placeholder='Enter your Email' onChange={setdata}/>
         <input type="text" name="password" id="passwordInput" placeholder='Enter password' onChange={setdata}/>
-        <p>i already has a account <span style={{color:'white',cursor:'pointer'}} onClick={()=>{navigate('/login')}}>Click here</span></p>
+        <p style={{color:'white ',fontSize:'1.5vh',cursor:'pointer'}}>i already has a account <span style={{color:'purple',cursor:'pointer'}} onClick={()=>{navigate('/login')}}>Click here</span></p>
         <button id='RegisterButton' onClick={handleData}>Register</button>
       </div>
     </div>

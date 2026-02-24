@@ -53,7 +53,7 @@ const Login = () => {
       <div className="inputConatiner">
         <input type="text" name="email" id="emailInput" placeholder='Enter your Email' onChange={setdata}/>
         <input type="text" name="password" id="passwordInput" placeholder='Enter password' onChange={setdata}/>
-        <p style={{fontSize:'1.5vh'}}>if you don't have account <span style={{color:'white',cursor:'pointer'}} onClick={()=>{navigate('/register')}}>Click here</span></p>
+        <p style={{fontSize:'1.5vh', color:'white'}}>if you don't have account <span style={{color:'purple',cursor:'pointer'}} onClick={()=>{navigate('/signin')}}>Click here</span></p>
         <button id='RegisterButton' onClick={handleData}>Login</button>
       </div>
     </div>
