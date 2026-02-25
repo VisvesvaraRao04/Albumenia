@@ -20,10 +20,7 @@ const ImagesContainer = () => {
       const response = await axios(
         `https://pixabay.com/api/?key=54120282-ae606bfaef46fe3a43ec2b613&q=${search}&image_type=photo&per_page=${number}`,
       );
-      if(search.trim().length>0)
-      {
         setData(response.data.hits);
-      }
     } catch (e) {
       console.log(e);
     } finally {
