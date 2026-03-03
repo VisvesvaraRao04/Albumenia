@@ -8,11 +8,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useNavigate } from "react-router-dom";
 
 const ImagesContainer = () => {
-  let [search, setSearch] = useState("HD stock Image");
+  let [search, setSearch] = useState("most liked");
   let [loading, SetLoading] = useState(false);
 
   let [data, setData] = useState([]);
-  let [number, setNumber] = useState(32);
+  let [number, setNumber] = useState(16);
   let fetchImages = async () => {
     try {
       SetLoading(true);
@@ -20,7 +20,7 @@ const ImagesContainer = () => {
       const response = await axios(
         `https://pixabay.com/api/?key=54120282-ae606bfaef46fe3a43ec2b613&q=${search}&image_type=photo&per_page=${number}`,
       );
-        setData(response.data.hits);
+      setData(response.data.hits);
     } catch (e) {
       console.log(e);
     } finally {
@@ -35,7 +35,7 @@ const ImagesContainer = () => {
   };
   useEffect(() => {
     fetchImages();
-  }, [number]);
+  },[number]);
   const handleAnimationComplete = () => {
     console.log("All letters have animated!");
   };
@@ -44,7 +44,7 @@ const ImagesContainer = () => {
     setNumber(number+20)
   };
   let imagesperpagedec = () => {
-    if(number>=32)
+    if(number>=36)
       setNumber(number-20)
   };
   
@@ -96,34 +96,43 @@ const ImagesContainer = () => {
         </div>
       </div>
       <div id="imageContainer">
-        {loading ? (
-          Array({number})
-            .fill()
-            .map((_, index) => (
-              <Skeleton
-                key={index}
-                height={200}
-                width={250}
-                borderRadius={10}
-                style={{ margin: "10px" }}
-              />
-            ))
-        ) : data.length !== 0 ? (
-          data.map((imgs) => (
-            <img
-              onClick={() => navigate("/details", { state: imgs })}
-              className="images"
-              src={imgs.webformatURL}
-              alt="img"
-              key={imgs.id}
-            />
-          ))
-        ) : (
-          <img id="imagenotfound" src={imagenotfound} alt="image not found" />
-        )}
-      </div>
+  {loading ? (
+    Array(number)
+      .fill()
+      .map((_, index) => (
+        <Skeleton
+          key={index}
+          height={200}
+          width={250}
+          borderRadius={10}
+          style={{ margin: "10px" }}
+        />
+      ))
+  ) : data.length !== 0 ? (
+    data.map((imgs) => (
+      <img
+        key={imgs.id}
+        loading="lazy"
+        src={imgs.webformatURL}
+        onClick={() => navigate("/details", { state: imgs })}
+        onError={(e) => (e.target.src = imagenotfound)}
+        className="images"
+        alt="img"
+        // style={{
+        //   opacity: 0,
+        //   transition: "opacity 0.4s ease"
+        // }}
+        // onLoad={(e) => {
+        //   e.target.style.opacity = 1;
+        // }}
+      />
+    ))
+  ) : (
+    <img id="imagenotfound" src={imagenotfound} alt="image not found" />
+  )}
+</div>
       {data.length !== 0 &&
-        (data.length === 32 ? (
+        (data.length === 16 ? (
           <button
             className="incButtons"
             style={{ backgroundColor: "white",color:'black', width: "34%",marginTop:'2vh' }}
@@ -147,7 +156,7 @@ const ImagesContainer = () => {
             View More
           </button>
           </div>
-        ))}{" "}
+        ))}
     </div>
 );
 };
